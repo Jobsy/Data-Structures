@@ -16,7 +16,7 @@ class LRUCache:
         self.limit = limit
         self.current_num_of_node = 0
         self.key_value_entries = DoublyLinkedList()
-        self.storage = {}
+        self.storage = dict()
 
     """
     Retrieves the value associated with the given key. Also
@@ -34,8 +34,8 @@ class LRUCache:
         if key in self.storage:
             key_value = self.storage[key]
             # self.current_num_of_node += 1
-            self.key_value_entries.move_to_front(key_value)
-            return key_value.value
+            self.key_value_entries.move_to_end(key_value)
+            return key_value.value[1]
         else:
             return None
 
@@ -53,4 +53,36 @@ class LRUCache:
     """
 
     def set(self, key, value):
-        pass
+        # # if not limit
+        # if not self.limit:
+        #     # increament current_num_of_node
+        #     self.current_num_of_node += 1
+        #     # push key-value pair to dict and to the head of key_value_entries
+        #     self.storage.update({key, value})
+        #     self.key_value_entries.add_to_head(value)
+        # # else
+        # else:
+        #     # pop from the dict and remove from the tail of key_value_entries
+        #     self.current_num_of_node += 1
+        #     self.storage.pop(key, None)
+        #     self.key_value_entries.remove_from_tail()
+
+        # # if key exist in the dict
+        #     # replace value of key to new value of the key
+        # # else
+        #     # crete new node with and add to dict and to the head of key_value_entries
+
+        if key in self.storage:
+            node = self.storage[key]
+            node.value = (key, value)
+            self.key_value_entries.move_to_end(node)
+            return
+
+        if self.current_num_of_node == self.limit:
+            del self.storage[self.key_value_entries.head.value[0]]
+            self.key_value_entries.remove_from_head()
+            self.current_num_of_node -= 1
+
+        self.key_value_entries.add_to_tail((key, value))
+        self.storage[key] = self.key_value_entries.tail
+        self.current_num_of_node += 1
