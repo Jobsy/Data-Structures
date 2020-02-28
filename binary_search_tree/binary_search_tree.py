@@ -1,7 +1,7 @@
-# from dll_stack import Stack
-# from dll_queue import Queue
-# import sys
-# sys.path.append('../queue_and_stack')
+from dll_stack import Stack
+from dll_queue import Queue
+import sys
+sys.path.append('../queue_and_stack')
 
 
 class BinarySearchTree:
@@ -66,7 +66,55 @@ class BinarySearchTree:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        # stack = Stack()
+        # stack.push(node)
+        # print(stack.len(), "length")
+        # print(node, "node")
+        # # print(node.value, "node.value")
+        # print(self.value, "self.value")
+        # print(self.left, "self.left")
+        # print(self.right.value, "self.right.value")
+        if node == None:
+            return
+        if node.left:
+            node.in_order_print(node.left)
+        print(node.value)
+        if node.right:
+            node.in_order_print(node.right)
+        # print(node.value)
+        # if self.left:
+        #     print("LHS1")
+        #     if self.left.value < self.value:
+        #         print("LHS2")
+        #         self.left.in_order_print(self.value)
+        #     else:
+        #         stack.push(self.value)
+        #         print(self.left.value, "LHS3")
+        # elif not self.left and self.right:
+        #     stack.push(self.value)
+        #     BinarySearchTree(value)
+        # elif self.right:
+        #     print("RHS1")
+        #     if self.right.value >= self.value:
+        #         stack.push(node.value)
+        #         print(self.right.value, "RHS2")
+
+        #     else:
+        #         print("RHS3")
+        #         self.right.in_order_print(node.value)
+
+        # if node.value < self.value:
+        #     if node.value == self.left.value:
+        #         print(node.value)
+        #     else:
+        #         return self.left.in_order_print(node.value)
+        #         # return False
+        # elif node.value >= self.value:
+        #     if node.value == self.right.value:
+        #         print(node.value)
+        #     else:
+        #         return self.right.in_order_print(node.value)
+        # return False
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
@@ -76,12 +124,21 @@ class BinarySearchTree:
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        stack = Stack()
+        stack.push(self)
+        # print(stack.len(), "/////")
+        print(node, "node")
+        print(self, "self")
+
+        # for value in stack.storage:
+        #     print
+        #     (value)
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
+
     def pre_order_dft(self, node):
         pass
 
